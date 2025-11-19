@@ -5,7 +5,7 @@ import Answer from "./components/Answer";
 
 function App() {
   const [question, setQuestion] = useState("");
-  const [result, setResult] = useState(undefined);
+  const [result, setResult] = useState([]);
 
   const payload = {
     contents: [
@@ -26,7 +26,11 @@ function App() {
     dataString = dataString.split("* ");
     dataString = dataString.map((item) => item.trim());
     // console.log(dataString);
-    setResult(dataString);
+    setResult([
+      ...result,
+      { type: "q", text: question },
+      { type: "a", text: dataString },
+    ]);
   };
   return (
     <>
@@ -34,12 +38,16 @@ function App() {
         <div className="col-span-1 bg-zinc-800"></div>
         <div className="col-span-4 p-10">
           <div className="container h-110 ">
-            <div className="text-white">
+            <div className="text-zinc-300">
               <ul>
                 {result &&
                   result.map((item, index) => (
-                    <li className="text-left p-1">
-                      <Answer ans={item} key={index} />
+                    <li className="text-left p-1" key={index + Math.random()}>
+                      <Answer
+                        ans={item}
+                        indexProp={index}
+                        totalResult={result.length}
+                      />
                     </li>
                   ))}
               </ul>
