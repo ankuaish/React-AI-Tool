@@ -6,6 +6,7 @@ import Answer from "./components/Answer";
 function App() {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState([]);
+  const [recentHistory, setRecentHistory] = useState([]);
 
   const payload = {
     contents: [
@@ -16,6 +17,7 @@ function App() {
   };
 
   const askQuestion = async () => {
+    localStorage.setItem("history", [question]);
     let response = await fetch(URL, {
       method: "POST",
       body: JSON.stringify(payload),
@@ -42,6 +44,43 @@ function App() {
               <ul>
                 {result &&
                   result.map((item, index) => (
+                    <div
+                      key={index + Math.random()}
+                      className={item.type === "q" ? "flex justify-end" : ""}
+                    >
+                      {item.type === "q" ? (
+                        <li
+                          className="text-right p-1 border-8 bg-zinc-700 border-zinc-700 rounded-tl-3xl rounded-bl-3xl rounded-br-3xl w-fit"
+                          key={index + Math.random()}
+                        >
+                          <Answer
+                            ans={item.text}
+                            indexProp={index}
+                            totalResult={1}
+                            type={item.type}
+                          />
+                        </li>
+                      ) : (
+                        item.text.map((ansItem, ansIndex) => (
+                          <li
+                            className="text-left p-1"
+                            key={ansIndex + Math.random()}
+                          >
+                            <Answer
+                              ans={ansItem}
+                              indexProp={ansIndex}
+                              totalResult={item.text.length}
+                              type={item.type}
+                            />
+                          </li>
+                        ))
+                      )}
+                    </div>
+                  ))}
+              </ul>
+              {/* <ul>
+                {result &&
+                  result.map((item, index) => (
                     <li className="text-left p-1" key={index + Math.random()}>
                       <Answer
                         ans={item}
@@ -50,7 +89,7 @@ function App() {
                       />
                     </li>
                   ))}
-              </ul>
+              </ul> */}
             </div>
           </div>
           <div className="bg-zinc-800 w-1/2 p-1 pr-5 text-white m-auto rounded-4xl border border-zinc-700 flex h-16">
