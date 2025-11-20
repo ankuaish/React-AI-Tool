@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { checkHeading, replaceHeadingStars } from "../helper";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import ReactMarkdown from "react-markdown";
 
 const Answer = ({ ans, indexProp, totalResult, type }) => {
   const [heading, setHeading] = useState(false);
@@ -11,6 +14,24 @@ const Answer = ({ ans, indexProp, totalResult, type }) => {
       setAnswer(replaceHeadingStars(ans));
     }
   }, []);
+  const renderer = {
+    code({ inline, className, children, ...props }) {
+      const match = /language-(\w+)/.exec(className || "");
+      return !inline && match ? (
+        <SyntaxHighlighter
+          {...props}
+          children={String(children).replace(/\n$/, "")}
+          language={match[1]}
+          style={dark}
+          preTag="div"
+        />
+      ) : (
+        <code {...props} className={className}>
+          {children}
+        </code>
+      );
+    },
+  };
 
   return (
     <>
@@ -19,7 +40,9 @@ const Answer = ({ ans, indexProp, totalResult, type }) => {
       ) : heading ? (
         <span className="pt-2 text-lg block text-white">{answer}</span>
       ) : (
-        <span className={type === "q" ? "pl-1" : null}>{answer}</span>
+        <span className={type === "q" ? "pl-1" : null}>
+          <ReactMarkdown components={renderer}>{answer}</ReactMarkdown>
+        </span>
       )}
     </>
   );
