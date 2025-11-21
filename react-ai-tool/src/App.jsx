@@ -23,7 +23,13 @@ function App() {
     if (question) {
       if (localStorage.getItem("history")) {
         let history = JSON.parse(localStorage.getItem("history"));
+        history = history.slice(0, 19);
         history = [question, ...history];
+        history = history.map(
+          (item) => item.charAt(0).toUpperCase() + item.slice(1).trim()
+        );
+
+        history = [...new Set(history)];
         localStorage.setItem("history", JSON.stringify(history));
         setRecentHistory(history);
       } else {
@@ -90,7 +96,7 @@ function App() {
         <div className="grid grid-cols-5 text-center">
           <select
             onChange={(event) => setDarkMode(event.target.value)}
-            className="fixed text-white bottom-0 p-5 bg-zinc-700"
+            className="fixed text-white bottom-0 pt-3 pb-3 pl-5 pr-5 bg-zinc-700"
           >
             <option value="dark">Dark</option>
             <option value="light">Light </option>
@@ -100,8 +106,8 @@ function App() {
             recentHistory={recentHistory}
             setSelectedHistory={setSelectedHistory}
           />
-          <div className="col-span-4 p-10 ">
-            <h1 className="text-4xl bg-clip-text text-transparent bg-linear-to-r from-pink-700 to-violet-700  ">
+          <div className="col-span-4 p-10">
+            <h1 className="text-4xl bg-clip-text text-transparent bg-linear-to-r from-pink-700 to-violet-700 ">
               Hello User, Ask me Anything
             </h1>
             {loader ? (

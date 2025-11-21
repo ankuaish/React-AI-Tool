@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { checkHeading, replaceHeadingStars } from "../helper";
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import ReactMarkdown from "react-markdown";
 
@@ -38,6 +38,7 @@ const Answer = ({ ans, indexProp, totalResult, type }) => {
       );
     },
   };
+
   return (
     <>
       {indexProp == 0 && totalResult > 1 ? (
@@ -49,7 +50,7 @@ const Answer = ({ ans, indexProp, totalResult, type }) => {
           {answer}
         </span>
       ) : (
-        <span className={type === "q" ? "pl-1" : null}>
+        <span className={type === "a" ? "pl-1" : null}>
           <ReactMarkdown components={renderer}>{answer}</ReactMarkdown>
         </span>
       )}
