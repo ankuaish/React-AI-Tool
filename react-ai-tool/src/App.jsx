@@ -96,7 +96,7 @@ function App() {
         <div className="grid grid-cols-5 text-center">
           <select
             onChange={(event) => setDarkMode(event.target.value)}
-            className="fixed text-white bottom-0 pt-3 pb-3 pl-5 pr-5 bg-zinc-700"
+            className="fixed w-auto text-white bottom-0 pt-3 pb-3 pl-5 pr-5 bg-zinc-700"
           >
             <option value="dark">Dark</option>
             <option value="light">Light </option>
@@ -106,8 +106,8 @@ function App() {
             recentHistory={recentHistory}
             setSelectedHistory={setSelectedHistory}
           />
-          <div className="col-span-4 p-10">
-            <h1 className="text-4xl bg-clip-text text-transparent bg-linear-to-r from-pink-700 to-violet-700 ">
+          <div className="md:col-span-4  col-span-3 h-screen p-10">
+            <h1 className="md:text-4xl text-2xl bg-clip-text text-transparent bg-linear-to-r from-pink-700 to-violet-700 ">
               Hello User, Ask me Anything
             </h1>
             {loader ? (
@@ -134,7 +134,7 @@ function App() {
 
             <div
               ref={scrollToAns}
-              className="container h-[70vh] overflow-y-auto pr-3"
+              className="container h-[70vh] overflow-auto pr-3"
             >
               <div className="dark:text-zinc-300 text-zinc-800">
                 <ul>
@@ -145,7 +145,7 @@ function App() {
                 </ul>
               </div>
             </div>
-            <div className="dark:bg-zinc-800 bg-red-100 w-1/2 p-1 pr-5 dark:text-white text-zinc-800 m-auto rounded-4xl border border-zinc-700 flex">
+            <div className="dark:bg-zinc-800 bg-red-100 w-full md:w-1/2 p-1 pr-5 dark:text-white text-zinc-800 m-auto rounded-4xl border border-zinc-700 flex">
               <input
                 type="text"
                 className="w-full h-full p-3 outline-none"

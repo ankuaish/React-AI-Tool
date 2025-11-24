@@ -23,8 +23,8 @@ const RecentHistory = ({
   return (
     <>
       {" "}
-      <div className="col-span-1 dark:bg-zinc-800 bg-red-100 pt-3 h-screen overflow-y-auto">
-        <h1 className="text-xl dark:text-white  text-black flex justify-center">
+      <div className="md:col-span-1 col-span-2 dark:bg-zinc-800 bg-red-100 pt-3 h-screen">
+        <h1 className="md:text-xl text-lg dark:text-white  text-black flex justify-center">
           <span>Recent Search</span>
           <button
             className="pt-1 pl-2 pr-2 pb-1 hover:bg-zinc-400"
