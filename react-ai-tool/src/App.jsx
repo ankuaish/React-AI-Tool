@@ -93,7 +93,7 @@ function App() {
   return (
     <>
       <div className={darkMode === "dark" ? "dark" : "light"}>
-        <div className="grid grid-cols-5 text-center">
+        <div className="grid md:grid-cols-5  grid-cols-6 text-center">
           <select
             onChange={(event) => setDarkMode(event.target.value)}
             className="fixed w-auto text-white bottom-0 pt-3 pb-3 pl-5 pr-5 bg-zinc-700"
@@ -106,7 +106,7 @@ function App() {
             recentHistory={recentHistory}
             setSelectedHistory={setSelectedHistory}
           />
-          <div className="md:col-span-4  col-span-3 h-screen p-10">
+          <div className="col-span-4 h-screen p-10">
             <h1 className="md:text-4xl text-2xl bg-clip-text text-transparent bg-linear-to-r from-pink-700 to-violet-700 ">
               Hello User, Ask me Anything
             </h1>
